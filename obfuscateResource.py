@@ -36,7 +36,7 @@ def getObfuscationKey(xml):
             if len(uid) == 0:
                 print ("Unique Identifier has no value.")
                 sys.exit(1)
-            return hashlib.sha1(uid.encode('utf-8'))
+            return hashlib.sha1(uid.encode('utf-8')).digest()
     print ("Could not find Unique ID in OPF")
     sys.exit(1)
 
@@ -61,12 +61,38 @@ def getOutputFile(input):
         sys.exit(1)
     return newfilename
 
+def obfuscateFile(key,original,obfuscated):
+    if len(key) != 20:
+        print("Key must be 20 bytes.")
+        sys.exit(1)
+    kbprocessed = 0
+    with open(original,'rb') as f1,open(obfuscated,'wb') as f2:
+        while True:
+            buf=f1.read(1024)
+            if buf:
+                ba = bytearray()
+                n = 0
+                for byte in buf:
+                    if kbprocessed == 0:
+                        m = (n % 20)
+                        keybyte = key[m:(m+1)]
+                        #The XOR
+                        byte = byte ^ ord(keybyte)
+                    ba.append(byte)
+                    n += 1
+                n=f2.write(ba)
+                kbprocessed = 1 #just can't be 0
+            else:
+                break
+    print("Obfuscated (or de-obfuscated) file written to " + obfuscated)
+
 def main():
     if len(sys.argv) != 3:
         showUsage()
     key = getObfuscationKey(sys.argv[1])
     newfile = getOutputFile(sys.argv[2])
-    print ("Program not yet finished.")
+    print ("Program not yet tested.")
+    obfuscateFile(key,sys.argv[2],newfile)
 
 if __name__ == "__main__":
     main() 
