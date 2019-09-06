@@ -5,18 +5,37 @@ import pathlib
 from xml.dom import minidom
 import hashlib
 
+def showUsage():
+    print ("Usage: " + sys.argv[0] + " path/to/contents.opf path/to/resource.ext")
+    sys.exit(1)
+
 def getObfuscationKey(xml):
     opf = pathlib.Path(xml)
     if not opf.exists ():
         print ("OPF File Not Found")
         sys.exit(1)
-    mydom = minidom.parse(xml)
-    pubid = mydom.getElementsByTagName('package')[0].attributes['unique-identifier'].value
+    try:
+        mydom = minidom.parse(xml)
+    except:
+        print (xml + " is not a valid XML file.")
+        sys.exit(1)
+    try:
+        pubid = mydom.getElementsByTagName('package')[0].attributes['unique-identifier'].value
+    except:
+        print ("Could not read unique-identifier attribute.")
+        sys.exit(1)
     nodelist = mydom.getElementsByTagName('dc:identifier')
     for node in nodelist:
         if node.hasAttribute('id') and node.getAttribute('id') == pubid:
-            uid = node.firstChild.nodeValue
+            try:
+                uid = node.firstChild.nodeValue
+            except:
+                print ("Unique Identifier has no value.")
+                sys.exit(1)
             # TODO - remove U+0020, U+0009, U+000D, U+000A
+            if len(uid) == 0:
+                print ("Unique Identifier has no value.")
+                sys.exit(1)
             return hashlib.sha1(uid.encode('utf-8'))
     print ("Could not find Unique ID in OPF")
     sys.exit(1)
@@ -42,7 +61,12 @@ def getOutputFile(input):
         sys.exit(1)
     return newfilename
 
-key = getObfuscationKey(sys.argv[1])
-newfile = getOutputFile(sys.argv[2])
+def main():
+    if len(sys.argv) != 3:
+        showUsage()
+    key = getObfuscationKey(sys.argv[1])
+    newfile = getOutputFile(sys.argv[2])
+    print ("Program not yet finished.")
 
-print ("Program not yet finished.") 
+if __name__ == "__main__":
+    main() 
