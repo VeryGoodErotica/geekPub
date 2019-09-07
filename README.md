@@ -10,6 +10,32 @@ versions, I do not know.
 All scripts here are MIT license. See the LICENSE file.
 
 
+generateUniqueIdentifier.py
+---------------------------
+
+Every ePub had to have a Unique Identifier defined in the `content.opf` file.
+When your publication has an ISBN number, that is *usually* what is used, When
+you do not have one, you can use a [UUID](https://tools.ietf.org/html/rfc4122)
+instead.
+
+This script generates a UUID and creates the necessary nodes and attributes in
+your `content.opf` file to use the UUID as the unique identifier for your ePub.
+
+UUID has no cost associated with it, nor does it have a central registry. It is
+simply a hex encoded 128-bit random number with some dashes inserted. As long
+as your operating system pRNG is not broken, you can have *extremely* high
+confidence the same UUID is not already in use elsewhere.
+
+If and when you do decide to get an actual ISBN, you can change your Unique
+Identifier to that ISBN in the future, but note that doing so will mean that
+any obfuscated resources need to be re-obfuscated from their original source,
+as the cryptography key used to obfuscate the resources is generated from the
+Unique Identifier.
+
+This script will exit if it detects the `content.opf` file already has a
+Unique Identifier set up.
+
+
 updateTimestamp.py
 ------------------
 
@@ -31,6 +57,8 @@ you are discussed at:
   https://stackoverflow.com/questions/662624/preserve-order-of-attributes-when-modifying-with-minidom
 
 This script takes a single argument: the path to your content.opf file.
+
+This script takes a single argument: The path to your `content.opf` file.
 
 
 obfuscateResource.py
