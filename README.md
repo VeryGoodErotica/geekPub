@@ -61,7 +61,7 @@ Please note that running the ePub obfuscation algorithm on an obfuscated file
 will deobfuscate the file.
 
 This script will *not* modify the file to be obfuscated on the filesystem. It
-will create a *new* file name with a different name, and it will exit if a file
+will create a *new* file with a different file name, and it will exit if a file
 of that name already exists.
 
 If `filename.ext` is the file to be obfuscated, `filename-obf.ext` will be the
