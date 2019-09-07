@@ -1,4 +1,4 @@
-#!/usr/bin/python36
+#!/usr/bin/env python
 import sys
 import os
 import pathlib
@@ -39,8 +39,10 @@ def updateTimestamp(xml):
     node.appendChild(now)
     node.setAttribute("property","dcterms:modified")
     metadata.appendChild(node)
+    string = mydom.toprettyxml(indent="  ",newl="\n",encoding="UTF-8").decode()
+    string = '\n'.join([x for x in string.split("\n") if x.strip()!=''])
     fh = open(xml, "w")
-    root.writexml(fh)
+    fh.write(string)
     fh.close()
 
 def main():

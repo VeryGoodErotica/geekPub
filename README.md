@@ -4,8 +4,20 @@ geekPub Shell Utilities
 These are shell utilities intended to accompany my coming (still barely started)
 ePub book on ePub.
 
-The Python utilities are tested with Python 3.6 and may not work with other
-versions, I do not know.
+The Python utilities here are tested with Python 3.6 and may not work with older
+versions.
+
+The python scripts that manipulate XML files use the `minidom` library to do
+so. That library does something I (and many others) am not too fond of, it
+reorders all attributes in a node to alphabetical order.
+
+Workarounds for this behavior can be found at
+
+    https://stackoverflow.com/questions/662624/preserve-order-of-attributes-when-modifying-with-minidom
+
+However, all of them were beyond the scope of this project. I choose to just
+live with it, but feel free to implement one of those solutions if you want
+to.
 
 All scripts here are MIT license. See the LICENSE file.
 
@@ -35,6 +47,8 @@ Unique Identifier.
 This script will exit if it detects the `content.opf` file already has a
 Unique Identifier set up.
 
+This script takes a single argument: The path to your `content.opf` file.
+
 
 updateTimestamp.py
 ------------------
@@ -48,15 +62,6 @@ proper.
 
 This script will remove any existing `<meta property="dcterms:modified"></meta>`
 tags within `<metadata/>` and then create one using the current timestamp.
-
-Note that the python minidom module this script uses re-orders attributes in
-other nodes as well, I consider that to be a very nasty bug in minidom even
-though technically it does not matter. Workarounds to this bug if it bothers
-you are discussed at:
-
-  https://stackoverflow.com/questions/662624/preserve-order-of-attributes-when-modifying-with-minidom
-
-This script takes a single argument: the path to your content.opf file.
 
 This script takes a single argument: The path to your `content.opf` file.
 
@@ -118,7 +123,8 @@ key.
 
 I do not yet do this, I mostly code in PHP so I need to look up how to do regex
 in python based on Unicode codepoints. However, it is unlikely the codepoints
-will exist in your Unique ID.
+will exist in your Unique ID. Those codepoints will not exist in either an
+ISBN or UUID number.
 
 ### obfuscateResource.py WARNING TWO
 

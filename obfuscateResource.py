@@ -12,7 +12,7 @@ def showUsage():
 def getObfuscationKey(xml):
     opf = pathlib.Path(xml)
     if not opf.exists ():
-        print ("OPF File Not Found")
+        print("OPF File Not Found")
         sys.exit(1)
     try:
         mydom = minidom.parse(xml)
@@ -20,7 +20,7 @@ def getObfuscationKey(xml):
         print (xml + " is not a valid XML file.")
         sys.exit(1)
     try:
-        pubid = mydom.getElementsByTagName('package')[0].attributes['unique-identifier'].value
+        pubid = mydom.getElementsByTagName('package')[0].getAttribute('unique-identifier')
     except:
         print ("Could not read unique-identifier attribute.")
         sys.exit(1)
@@ -42,7 +42,7 @@ def getObfuscationKey(xml):
 
 def getOutputFile(input):
     orig = pathlib.Path(input)
-    if not orig.exists ():
+    if not orig.exists():
         print ("File to obfuscate (or de-obfuscate) does not exist.")
         sys.exit(1)
     filename, extension = os.path.splitext(input)
@@ -56,7 +56,7 @@ def getOutputFile(input):
     else:
         newfilename = filename + '-obf' + extension
     new = pathlib.Path(newfilename)
-    if new.exists ():
+    if new.exists():
         print ("Target output file " + newfilename + " already exists.")
         sys.exit(1)
     return newfilename
@@ -91,7 +91,7 @@ def main():
         showUsage()
     key = getObfuscationKey(sys.argv[1])
     newfile = getOutputFile(sys.argv[2])
-    print ("Program not yet tested.")
+    print ("Program not yet fully tested.")
     obfuscateFile(key,sys.argv[2],newfile)
 
 if __name__ == "__main__":
