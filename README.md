@@ -139,7 +139,7 @@ mkepub.sh
 This is an example shell script for creating an ePub archive from the UNIX
 command line. You will need to modify it for your own use.
 
-The concept, it makes it easy to pull your ePub sources for a `git` or other
+The concept, it makes it easy to pull your ePub sources from a `git` or other
 revision control system and create the archive without needing fancy GUI tools.
 
 The example shell script makes use of the `updateTimestamp.py` script to update
