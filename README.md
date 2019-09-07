@@ -13,7 +13,7 @@ reorders all attributes in a node to alphabetical order.
 
 Workarounds for this behavior can be found at
 
-    https://stackoverflow.com/questions/662624/preserve-order-of-attributes-when-modifying-with-minidom
+https://stackoverflow.com/questions/662624/preserve-order-of-attributes-when-modifying-with-minidom
 
 However, all of them were beyond the scope of this project. I choose to just
 live with it, but feel free to implement one of those solutions if you want
@@ -25,8 +25,8 @@ All scripts here are MIT license. See the LICENSE file.
 generateUniqueIdentifier.py
 ---------------------------
 
-Every ePub had to have a Unique Identifier defined in the `content.opf` file.
-When your publication has an ISBN number, that is *usually* what is used, When
+Every ePub has to have a Unique Identifier defined in the `content.opf` file.
+When your publication has an ISBN number, that is *usually* what is used. When
 you do not have one, you can use a [UUID](https://tools.ietf.org/html/rfc4122)
 instead.
 
