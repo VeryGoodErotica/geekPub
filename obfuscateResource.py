@@ -68,7 +68,7 @@ def obfuscateFile(key,original,obfuscated):
     kbprocessed = 0
     with open(original,'rb') as f1,open(obfuscated,'wb') as f2:
         while True:
-            buf=f1.read(1024)
+            buf=f1.read(1040)
             if buf:
                 ba = bytearray()
                 n = 0
