@@ -13,15 +13,15 @@ All scripts here are MIT license. See the LICENSE file.
 updateTimestamp.py
 ------------------
 
-When any change is made to your ePub, the <meta property="dcterms:modified"></meta>
+When any change is made to your ePub, the `<meta property="dcterms:modified"></meta>`
 node is suppose to updated to reflect the modification time.
 
 This script does that, you can call if from your script that generates the ePub
 before packing it into a zip archive and know that modification timestamp is
 proper.
 
-This script will remove any existing <meta property="dcterms:modified"></meta>
-tags within <metadata/> and then create one using the current timestamp.
+This script will remove any existing `<meta property="dcterms:modified"></meta>`
+tags within `<metadata/>` and then create one using the current timestamp.
 
 Note that the python minidom module this script uses re-orders attributes in
 other nodes as well, I consider that to be a very nasty bug in minidom even
@@ -82,7 +82,7 @@ the obfuscation key.
 The second argument is the path to the resource to be obfuscated (or
 de-obfuscated if it was already obfuscated with the same key)
 
-### WARNING
+### obfuscateResource.py WARNING
 
 According to the specification, there are four Unicode codepoints that are to
 be removed from the Unique ID before it is hashed to create the obfuscation
@@ -92,7 +92,7 @@ I do not yet do this, I mostly code in PHP so I need to look up how to do regex
 in python based on Unicode codepoints. However, it is unlikely the codepoints
 will exist in your Unique ID.
 
-### WARNING TWO
+### obfuscateResource.py WARNING TWO
 
 This has not been fully tested. I have not (yet) created an ePub with
 obfuscated resources and tested that it actually works on a variety of
