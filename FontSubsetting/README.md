@@ -19,6 +19,26 @@ to about 40-45 kB in size.
     unicode-range: U+0020-007E,U+00A0-00FF,U+0152-0153,U+0160-0161,U+0178,U+017D-017E,U+0192,U+02C6,U+02DC,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2039-203A,U+20AC,U+2116-2117,U+2122;
 
 
+GreekRange.txt
+--------------
+
+All the printable 7-bit ASCII plus the Unicode 'Greek and Coptic' block
+(`U+0370-03FF`) and the 'Greek Extended' block (`U+1F00-U+1FFF`) with additions
+from ISO-8859-7, Windows-1253, ISO-5428, and 'Combining and letter-free
+diacritics' referenced at Wikipedia that were not already part of the Unicode
+blocks specific to Greek.
+
+If you use Greek and there are any glyphs commonly used in Greek literature
+that you notice are missing, *please* let me know so this subset can be updated
+to include them.
+
+The size of the result will vary depending as not all fonts that support Greek
+also support Polytonic Greek, but for me they tended to be about 55-60 kB in
+size.
+
+    unicode-range: U+0020-007E,U+00A0,U+00A3-00A9,U+00AB-00B7,U+00BB-00BE,U+0192,U+02BC-02BD,U+02D8,U+0300-0301,U+0304,U+0306,U+0308,U+0313-0314,U+0342-0345,U+0370-03FF,U+1F00-1FFF,U+2013-2015,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2039-203A,U+20AC,U+20AF,U+2122
+
+
 OrnamentalRange.txt
 -------------------
 
