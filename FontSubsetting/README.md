@@ -8,6 +8,11 @@ likely to need.
 
 See my (coming) book for more information.
 
+Using these files to subset a font is only intended as a method for reducing
+the *size* of the font. It may not satisfy the font subsetting requirements
+that some commercial fonts have since the result is still quite usable as a
+font installed on a desktop system.
+
 
 WesternLatinRange.txt
 ---------------------
