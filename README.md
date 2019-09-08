@@ -93,6 +93,37 @@ Unique Identifier set up.
 This script takes a single argument: The path to your `content.opf` file.
 
 
+addIsbnNumber.py
+----------------
+
+If you have an ISBN number for your publication, this script will add it to
+your `content.opf` file as the Unique Identifier. If fed a 10 digit ISBN it
+will first be converted to a 13 digit ISBN, though that should not be needed
+since 10 digit ISBN are not issued anymore and digital editions are *suppose*
+to have a different ISBN than previous editions.
+
+The script will exit if fed an ISBN number it detects as invalid. The script
+will exit if it detects the ePub already has a Unique Identifuer *unless* the
+`id` attribute for that unique identifier is `prng-uuid` which is the default
+`id` attribute set by the `generateUniqueIdentifier.py` script. This is done to
+prevent accidental alteration of the Unique Identifier.
+
+If you intend to alter the Unique Identifier, manually edit your `content.opf`
+file and remove the `unique-identifier` attribute from the root `package` node.
+
+This script will not remove any existing `dc:identifier` nodes, and it is okay
+to have as many of those as you need, but only one can have an `id` attribute
+that corresponds with the `package` `unique-identifier` attribute.
+
+When there are existing `dc:identifier` nodes, this script will insert the
+`dc:identifier` for the ISBN number before the other(s). This is because some
+ePub readers are not fully ePub 3 compliant and expect the first to be the ISBN
+number.
+
+The first argument to the script is the path to your `content.opf` file and the
+second argument is the ISBN number (with or without hyphens).
+
+
 updateTimestamp.py
 ------------------
 
