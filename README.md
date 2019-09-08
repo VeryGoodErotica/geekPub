@@ -25,7 +25,7 @@ All scripts here are MIT license. See the LICENSE file.
 INSTALLATION
 ------------
 
-At least one of the scripts *requires* Python 3.6 and the other may as well.
+At least one of the scripts *requires* Python 3.6 and the others may as well.
 On older UNIX systems you may need to install Python 3.6. For well-maintained
 distributions this is usually easy, e.g. on CentOS 7 with EPEL:
 
@@ -35,7 +35,7 @@ In those cases, you need to change the shebang from
 
     #!/usr/bin/env python
 
-to
+to something like (depending on your system)
 
     #!/usr/bin/env python36
 
@@ -45,9 +45,9 @@ do not have to do anything (except *maybe* install the pytz package) for these
 scripts to work.
 
 I recommend putting the python scripts into `~/bin/` or if they need to be
-made available in multiple user accounts, into `/usr/local/bin`
+made available in multiple user accounts, into `/usr/local/bin/`
 
-Be shure to set the execution bit on them (e.g. `chmod +x ~/bin/*.py`)
+Be sure to set the execution bit on them (e.g. `chmod +x ~/bin/*.py`)
 
 I would appreciate it if a MacOS user (or even a Windows user) would send me
 a README with Python 3.6 install instructions for those operating systems, I
@@ -55,7 +55,8 @@ do not have regular access to them.
 
 I know MacOS already has Python but last time I had access to MacOS it was a
 really outdated version and I had to install a newer one, I believe using a
-program called `homebrew` but I can not recall.
+program called `homebrew` but I can not recall. It is quite possible there are
+official packages distributed by the Python maintainers for MacOS as well.
 
 For the `bash` shell script(s) they are not intended to be installed in a
 directory in your path but are intended to be skeletons you modify as needed to
