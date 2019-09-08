@@ -115,23 +115,6 @@ the obfuscation key.
 The second argument is the path to the resource to be obfuscated (or
 de-obfuscated if it was already obfuscated with the same key)
 
-### obfuscateResource.py WARNING
-
-According to the specification, there are four Unicode codepoints that are to
-be removed from the Unique ID before it is hashed to create the obfuscation
-key.
-
-I do not yet do this, I mostly code in PHP so I need to look up how to do regex
-in python based on Unicode codepoints. However, it is unlikely the codepoints
-will exist in your Unique ID. Those codepoints will not exist in either an
-ISBN or UUID number.
-
-### obfuscateResource.py WARNING TWO
-
-This has not been fully tested. I have not (yet) created an ePub with
-obfuscated resources and tested that it actually works on a variety of
-different readers. That will be done shortly.
-
 
 mkepub.sh
 ---------

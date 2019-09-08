@@ -32,7 +32,10 @@ def getObfuscationKey(xml):
             except:
                 print ("Unique Identifier has no value.")
                 sys.exit(1)
-            # TODO - remove U+0020, U+0009, U+000D, U+000A
+            uid = uid.translate({32: None}) # u+0020 SPACE
+            uid = uid.translate({9: None})  # u+0009 TAB
+            uid = uid.translate({13: None}) # u+000D CR
+            uid = uid.translate({10: None}) # U+000A LF
             if len(uid) == 0:
                 print ("Unique Identifier has no value.")
                 sys.exit(1)
