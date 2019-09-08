@@ -94,7 +94,6 @@ def main():
         showUsage()
     key = getObfuscationKey(sys.argv[1])
     newfile = getOutputFile(sys.argv[2])
-    print ("Program not yet fully tested.")
     obfuscateFile(key,sys.argv[2],newfile)
 
 if __name__ == "__main__":
