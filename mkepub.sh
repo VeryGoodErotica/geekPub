@@ -31,3 +31,5 @@ echo -n application/epub+zip >mimetype
 
 zip -r -X youBook.zip mimetype META-INF OEBPS
 mv yourBook.zip yourBook.epub
+
+~/bin/epubcheck.sh yourBook.epub

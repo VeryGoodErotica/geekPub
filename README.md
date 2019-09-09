@@ -190,6 +190,29 @@ The second argument is the path to the resource to be obfuscated (or
 de-obfuscated if it was already obfuscated with the same key)
 
 
+epubcheck.sh
+------------
+
+This is a bash wrapper script for the [epubcheck](https://github.com/w3c/epubcheck)
+utility.
+
+Install it in `~/bin/` and make it executable:
+
+    cp epubcheck.sh ~/bin/ && chmod +x ~/bin/epubcheck.sh
+
+You will want to change the `EPUBCHECK` variable to point to the location where
+you unpacked the download from their github project.
+
+If you have more than one version a `java` installed, you *may* need to change
+the `OPERATION` variable to specify the full path to the `java` executable you
+want used.
+
+If there is an option to the `epubcheck.jar` you *always* want used, you can
+optionally change the `OPTIONS` variable to specify that option after the `$@`
+but make sure to put it *after* the `$@` and that there is a space between
+them.
+
+
 mkepub.sh
 ---------
 
@@ -201,3 +224,6 @@ revision control system and create the archive without needing fancy GUI tools.
 
 The example shell script makes use of the `updateTimestamp.py` script to update
 the modification timestamp before it creates the archive.
+
+The example shell script makes use of the `epubcheck.sh` shell script to check
+the result for validation errors.
