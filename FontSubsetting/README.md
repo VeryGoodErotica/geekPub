@@ -44,6 +44,48 @@ size.
     unicode-range: U+0020-007E,U+00A0,U+00A3-00A9,U+00AB-00B7,U+00BB-00BE,U+0192,U+02BC-02BD,U+02D8,U+0300-0301,U+0304,U+0306,U+0308,U+0313-0314,U+0342-0345,U+0370-03FF,U+1F00-1FFF,U+2013-2015,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2039-203A,U+20AC,U+20AF,U+2122
 
 
+ThaiRange.txt
+-------------
+
+All the printable 7-bit ASCII plus all glyphs from Thai Industrial Standard
+620-2533 (usually referred to as TIS-620), ISO 8859-11 (identical to TIS-620
+with addition of non-breaking space), Windows-874 (identical to ISO 8859-11 with
+addition of Euro, ellipsis, single and double curly quotes, bullet, en-dash and
+em-dash) and three additional glyphs from IBM-874 (Cent sign, Not sign, Broken
+Bar).
+
+It is my *suspicion* there are other glyphs used in Thai eBooks with enough
+frequency to warrant inclusion in this range but I do not *yet* know what they
+are.
+
+    unicode-range: U+0020-007E,U+00A0,U+00A2,U+00A6,U+00AC,U+0E01-0E3A,U+0E3F-0E5B,U+2013-2014,U+2018-2019,U+201C-201D,U+2026,U+20AC
+
+
+WGL4.txt
+--------
+
+This set includes all glyphs defined in the
+[Windows Glyph List 4](https://en.wikipedia.org/wiki/Windows_Glyph_List_4)
+with the addition of five glyphs not in the official WGL4.
+
+It includes all of Windows-1252 (Windows Western), Windows-1250 (Windows Central
+European), Windows-1251 (Windows Cyrillic), Windows-1253 (Windows Greek),
+Windows-1254 (Windows Turkish), Windows 1257 (Windows Baltic) and MS-DOS
+codepage 437.
+
+Four of the five added glyphs are Romainian letters added to many Windows fonts
+in Windows Vista (`U+0218-021B`) and the fifth is the sound recording copyright
+symbol (`U+2117`).
+
+My personal *opinion* is that this subset should only be used if most of your
+content is covered by the `WesternLatinRange.txt` but your content also includes
+some Greek and Cryillic *and* you want to use the same font family for that
+content.
+
+Do to a very large number of glyphs scattered throughout Unicode, I am not
+providing a CSS `unicode-range` code declaration for WGL4.
+
+
 OrnamentalRange.txt
 -------------------
 
