@@ -18,10 +18,10 @@ WesternLatinRange.txt
 ---------------------
 
 All the Unicode glyphs associated with Latin-1 (ISO-8859-1), Latin-9 (ISO-8859-15)
-and Windows-1252 plus two additional glyphs. Generally reduces a TTF font file
-to about 40-45 kB in size.
+and Windows-1252 plus all the so-called ‘Vulgar Fractions’ and two additional
+glyphs. Generally reduces a TTF font file to about 40-45 kB in size.
 
-    unicode-range: U+0020-007E,U+00A0-00FF,U+0152-0153,U+0160-0161,U+0178,U+017D-017E,U+0192,U+02C6,U+02DC,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2039-203A,U+20AC,U+2116-2117,U+2122;
+    unicode-range: U+0020-007E,U+00A0-00FF,U+0152-0153,U+0160-0161,U+0178,U+017D-017E,U+0192,U+02C6,U+02DC,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2039-203A,U+20AC,U+2116-2117,U+2122,U+2150-215E;
 
 
 GreekRange.txt
@@ -66,16 +66,17 @@ WGL4.txt
 
 This set includes all glyphs defined in the
 [Windows Glyph List 4](https://en.wikipedia.org/wiki/Windows_Glyph_List_4)
-with the addition of five glyphs not in the official WGL4.
+with the addition of some glyphs not in the official WGL4.
 
 It includes all of Windows-1252 (Windows Western), Windows-1250 (Windows Central
 European), Windows-1251 (Windows Cyrillic), Windows-1253 (Windows Greek),
 Windows-1254 (Windows Turkish), Windows 1257 (Windows Baltic) and MS-DOS
 codepage 437.
 
-Four of the five added glyphs are Romainian letters added to many Windows fonts
-in Windows Vista (`U+0218-021B`) and the fifth is the sound recording copyright
-symbol (`U+2117`).
+Four of the added glyphs are Romainian letters added to many Windows fonts
+in Windows Vista (`U+0218-021B`) and a fifth is the sound recording copyright
+symbol (`U+2117`). I also added the rest of the so-called ‘Vulgar Fractions’
+that were not already in WGL4.
 
 My personal *opinion* is that this subset should only be used if most of your
 content is covered by the `WesternLatinRange.txt` but your content also includes
@@ -84,6 +85,15 @@ content.
 
 Do to a very large number of glyphs scattered throughout Unicode, I am not
 providing a CSS `unicode-range` code declaration for WGL4.
+
+The WGL4 list was created so that application developers who only used those
+glyphs in their applications could know the glyphs would display as intended on
+a Windows system and so that font developers who included all those glyphs in
+their fonts could know they would be usable in applications that only used
+glyphs from that list.
+
+It is my *suspicion* that the default fonts in the majority of eBook readers
+have support for all glyphs in the WGL4 list.
 
 
 OrnamentalRange.txt
