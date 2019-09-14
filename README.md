@@ -190,6 +190,28 @@ The second argument is the path to the resource to be obfuscated (or
 de-obfuscated if it was already obfuscated with the same key)
 
 
+iBooksFontsEmbed.py
+-------------------
+
+By default, iBooks on iOS will use embedded fonts everywhere *except* for text
+that is a child of a paragraph node. Usually this works out okay, but there will
+be cases that make you want to scream.
+
+The workaround is a non-standard file called `com.apple.ibooks.display-options.xml`
+in your `META-INF` directory with an option telling iBooks to use your specified
+fonts everywhere.
+
+This script creates that file.
+
+This is just version 1 of the script. There may be other iBooks specific options
+that can be set in that file, I do not know. If there are, then a *future*
+version will parse the file first if it exists and add the option if it is not
+already set. But this version creates the file if it does not exist and exits if
+it already exists.
+
+The script takes a single argument: The path to the `META-INF` directory.
+
+
 epubcheck.sh
 ------------
 
