@@ -65,6 +65,63 @@ called `OEBPS` and that your OPF file is called `content.opf` but the ePub
 specification does not make such assertions.
 
 
+createSkeletonEpub.py
+---------------------
+
+This script can be used to create a new projet. It creates the `META-INF`
+directory and the `container.xml` file along with the content directory and the
+OPF file. The script can be run without arguments in which case default values
+are used, or you can use switches to override the default values:
+
+    usage: createSkeletonEpub.py [-h] [-t TITLE] [-d DESCRIPTION] [-g GENRE]
+                                 [-a AUTHOR] [-p PUBLISHER] [-e PUBLICATIONDATE]
+                                 [-x XMLLANG] [-l BOOKLANG] [-D OEBPS] [-f OPF]
+    
+    Setup an initial ePub 3 container structure. All arguments are optional.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -t TITLE, --title TITLE
+                            The title of the book
+      -d DESCRIPTION, --description DESCRIPTION
+                            A short description of the book
+      -g GENRE, --genre GENRE
+                            The genre the book fits into
+      -a AUTHOR, --author AUTHOR
+                            The author of the book
+      -p PUBLISHER, --publisher PUBLISHER
+                            The book publisher
+      -e PUBLICATIONDATE, --pubdate PUBLICATIONDATE
+                            Publication date
+      -x XMLLANG, --xmllang XMLLANG
+                            BCP 47 language string for the Package Document File
+                            (OPF)
+      -l BOOKLANG, --lang BOOKLANG
+                            BCP 47 language string for the language of the book
+      -D OEBPS, --contentdir OEBPS
+                            Content directory for your ePub files
+      -f OPF, --opffile OPF
+                            File name for the Package Document File (OPF)
+
+The default for the publication data metadata is six weeks in the future and
+will almost certainly need editing within the Package Document File but since it
+is requires metadata, I had to use something. If you know the planned
+publication date when running the script, the `-e` or `--pubdate` switches will
+override that guess and accepts string dates, such as `"5 dec 2020"` etc.
+
+The default values when used without switches are at the top of the
+`createSkeletonEpub.py` file just under all the `import whatever` declarations
+if you want to customize the defaults for your environment.
+
+The script uses a coulple python dependencies some systems may not have:
+
+1. `language_tags` - used to validate BCP 47 language tags.
+2. `dateparser` - used to normalize date strings.
+
+Both are available via `pip` if your operating system vendor does not have
+packages for them.
+
+
 generateUniqueIdentifier.py
 ---------------------------
 
