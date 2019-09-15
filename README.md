@@ -142,7 +142,7 @@ UUID has no cost associated with it, nor does it have a central registry. It is
 simply a hex encoded 128-bit random number with some dashes inserted. As long
 as your operating system pRNG is not broken, you can have *extremely* high
 confidence the same UUID is not already in use elsewhere, there are literally
-3.4 X 10^38 possible UUID value, duplicates when generated via a quality pRNG
+3.4 X 10^38 possible UUID values, duplicates when generated via a quality pRNG
 will not happen.
 
 If and when you do decide to get an actual ISBN, you can change your Unique

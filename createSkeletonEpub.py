@@ -401,12 +401,6 @@ def main():
     setPackageDocumentFilename(args.opf.strip())
     setupContainer()
 
-# These defaults probably do not need to be changed when installing
-title = 'Book Title'
-description = 'Book Description'
-contentdir = 'EPUB'
-opffile = 'content.opf'
-pubdate = '' # When set to empty string, it uses six weeks in future
 
 if __name__ == "__main__":
     main() 
