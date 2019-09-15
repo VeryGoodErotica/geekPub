@@ -61,8 +61,9 @@ official packages distributed by the Python maintainers for MacOS as well.
 For the `bash` shell script(s) they are not intended to be installed in a
 directory in your path but are intended to be skeletons you modify as needed to
 automate your workflow. For example, they assume your content directory is
-called `OEBPS` and that your OPF file is called `content.opf` but the ePub
-specification does not make such assertions.
+called `EPUB` and that your OPF file is called `content.opf` but the ePub
+specification does not make such assertions. Using `OEBPS` for the content
+directory is also extremely common.
 
 
 createSkeletonEpub.py
@@ -121,6 +122,10 @@ The script uses a coulple python dependencies some systems may not have:
 Both are available via `pip` if your operating system vendor does not have
 packages for them.
 
+The `createSkeletonEpub.py` will create a unique identifier using a UUID but you
+can use the `addIsbnNumber.py` to use an ISBN number instead if you have (or
+get) one.
+
 
 generateUniqueIdentifier.py
 ---------------------------
@@ -136,7 +141,9 @@ your `content.opf` file to use the UUID as the unique identifier for your ePub.
 UUID has no cost associated with it, nor does it have a central registry. It is
 simply a hex encoded 128-bit random number with some dashes inserted. As long
 as your operating system pRNG is not broken, you can have *extremely* high
-confidence the same UUID is not already in use elsewhere.
+confidence the same UUID is not already in use elsewhere, there are literally
+3.4 X 10^38 possible UUID value, duplicates when generated via a quality pRNG
+will not happen.
 
 If and when you do decide to get an actual ISBN, you can change your Unique
 Identifier to that ISBN in the future, but note that doing so will mean that
