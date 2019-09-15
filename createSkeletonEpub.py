@@ -11,10 +11,18 @@ from xml.dom import minidom
 import argparse
 
 # defaults safe to override when installing
-xmllang = 'en-US'  # Must be valid BCP 47
-booklang = 'en-US' # Must be valid BCP 47
-publisher = ''     # when empty, publisher metadata not added by default
-author = 'Book Author'
+xmllang = 'en-US'      # Must be valid BCP 47
+booklang = 'en-US'     # Must be valid BCP 47
+author = 'Book Author' # names should be upper case first letter
+genre = 'Book Genre'
+publisher = ''         # when empty, publisher metadata not added by default
+
+# These default values probably do not need to be changed when installing
+title = 'Book Title'
+description = 'Book Description'
+contentdir = 'EPUB'
+opffile = 'content.opf'
+pubdate = ''           # When set to empty string, it uses six weeks in future
 
 # parameter related functions
 def sanitizeTextString(stype, string):
@@ -26,8 +34,7 @@ def sanitizeTextString(stype, string):
     string = string.replace('&amp;','&#x26')
     # TODO - html5 named entities to hex
     # TODO - verify only numbered entities used
-    # TODO - Common Latin accented char entities to glyph 
-    # replace hex/ordinal entities for <,>,&
+    # now replace hex/ordinal entities for <,>,&
     string = string.replace('&#x3c;','&lt;')
     string = string.replace('&#x3C;','&lt;')
     string = string.replace('&#x003c;','&lt;')
@@ -38,13 +45,14 @@ def sanitizeTextString(stype, string):
     string = string.replace('&#x003e;','&gt;')
     string = string.replace('&#x003E;','&gt;')
     string = string.replace('&#x26;','&amp;')
+    string = string.replace('&#x0026;','&amp;')
     string = string.replace('&#38;','&amp;')
     # verify result can create a text node
     mydom = minidom.parseString('<whatever/>')
     try:
         mydom.createTextNode(string)
     except:
-        print ('The parameter value entered for ' + stype + ' is not legal and can not be automagically sanitized.')
+        print ('The parameter value entered for ' + stype + ' is not legal and can not be sanitized.')
         sys.exit(1)
     return string
 
@@ -176,7 +184,6 @@ def setContentDirectory(string):
     global contentdir
     contentdir = string
 
-
 # non parameter related functions
 def generatePubDate():
     pdate = pytz.utc.localize(datetime.datetime.utcnow() + datetime.timedelta(weeks=6))
@@ -295,7 +302,6 @@ def createOPF(xml):
         print ('This might be okay but could be accidental.')
 
 def setupContainer():
-    cwd = pathlib.Path.cwd()
     metainf = pathlib.Path('META-INF')
     if metainf.exists():
         print ('META-INF already exists. Exiting now.')
@@ -398,10 +404,9 @@ def main():
 # These defaults probably do not need to be changed when installing
 title = 'Book Title'
 description = 'Book Description'
-genre = 'Book Type'
 contentdir = 'EPUB'
 opffile = 'content.opf'
-pubdate = ''
+pubdate = '' # When set to empty string, it uses six weeks in future
 
 if __name__ == "__main__":
     main() 
