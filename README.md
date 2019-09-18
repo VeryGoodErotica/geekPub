@@ -254,26 +254,81 @@ The second argument is the path to the resource to be obfuscated (or
 de-obfuscated if it was already obfuscated with the same key)
 
 
-iBooksFontsEmbed.py
--------------------
+iBooksOptions.py
+----------------
 
-By default, iBooks on iOS will use embedded fonts everywhere *except* for text
-that is a child of a paragraph node. Usually this works out okay, but there will
-be cases that make you want to scream.
+iBooks (and possibly Apple Books, I do not yet know) has a special XML file
+within the `META-INF` directory that controls some of its options. This python
+script allows you to easily create, modidy, or delete that special XML file.
 
-The workaround is a non-standard file called `com.apple.ibooks.display-options.xml`
-in your `META-INF` directory with an option telling iBooks to use your specified
-fonts everywhere.
+    usage: iBooksOptions.py [-h] [-p PLATFORM] [-l LAYOUT] [-f FONTS] [-s SPREAD]
+                            [-i INTERACTIVE] [-o ORIENTATION] [-M METAINF]
+    
+    Setup or modify iBooks custom META-INF XML file.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -p PLATFORM, --platform PLATFORM
+                            The target iOS device platform
+      -l LAYOUT, --fixed-layout LAYOUT
+                            True or False. Whether or not a fixed layout is being
+                            used
+      -f FONTS, --publisher-fonts FONTS
+                            True or False. Whether or not publisher fonts are
+                            embedded
+      -s SPREAD, --open-to-spread SPREAD
+                            True or False. Whether or not the iBook should open to
+                            spread
+      -i INTERACTIVE, --interactive INTERACTIVE
+                            True or False. Whether or not scripted content exists
+      -o ORIENTATION, --orientation-lock ORIENTATION
+                            Portrait or Landscape or None. A forced orientation
+                            for the ePub
+      -M METAINF, --META-INF METAINF
+                            Path to META-INF directory.
 
-This script creates that file.
+For the `--platform` option, you need to specify whether the options you are
+specifying are for the iPhone, iPad, or all iOS devices. The default value is
+`all`.
 
-This is just version 1 of the script. There may be other iBooks specific options
-that can be set in that file, I do not know. If there are, then a *future*
-version will parse the file first if it exists and add the option if it is not
-already set. But this version creates the file if it does not exist and exits if
-it already exists.
+There are four boolean settings you can specify and one non-boolean setting. For
+the boolean settings, the iBooks default value is `false` so it only makes sense
+for the XML tag controlling them to be there when set to True.
 
-The script takes a single argument: The path to the `META-INF` directory.
+For the boolean settings, it only makes sense for them to be defined in the
+`&lt;device/&gt;` node for all OR iphone OR ipad, so specifying one of those
+options will remove all other references to the option. If one of those options
+is already set, setting the option to `false` will remove the option.
+
+The fifth option, `orientation-lock`, there may be use cases where the ePub
+publisher wants the orientation lock to be landscape for iPhone and portrait for
+iPad, so in that case, it may make sense to have it defined differently for
+both iPhone and iPad.
+
+You can run the script several times to fine-tune your selection. For example,
+you can run it once to create the options for all iOS devices and then run it
+a second time specifying iPad for an option you only want to apply to iPads
+(such as the `--spread` option).
+
+### --fixed-layout
+Boolean option. If your ePub uses a fixed layout, you should probably set this
+to `true` for all iOS devices.
+
+### --publisher-fonts
+Boolean option. If your ePub has embedded fonts you want used in paragraph nodes
+you probably should set this to `true` for all devices.
+
+### --open-to-spread
+Boolean option. If you want your ePub to open to spread, set this to `true`. If
+you use this at all, I recommend only setting it for the iPad device.
+
+### --interactive
+Boolean option. If your ePub includes scripted interactive content, you probably
+want to set this to `true` for all devices.
+
+### --orientation-lock
+If you want your ePub to only be viewable in portrait or landscape, you can
+specify which with this option.
 
 
 epubcheck.sh
