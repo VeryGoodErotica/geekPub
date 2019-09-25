@@ -33,3 +33,9 @@ zip -r -X youBook.zip mimetype META-INF EPUB
 mv yourBook.zip yourBook.epub
 
 ~/bin/epubcheck.sh yourBook.epub
+
+# run accessibility check if available
+if hash ace 2>/dev/null; then
+  ace -f -s -o AceReport yourBook.epub
+  echo "Accessibility report written to AceReport directory"
+fi
