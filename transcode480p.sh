@@ -6,14 +6,17 @@
 # This script assumes sox is installed. It is used to normalize the audio volume
 # and audio specification to 16-bit 48kHz.
 #
-# This script assumes the input video is 16:9 aspect ratio
+# This script assumes the input video is 16:9 aspect ratio.
+#
+# For 16:9 480p a width of 852 or 854 is commonly used. I chose 848 because it is
+# divisible by 16 (I am not the first, there is plenty of precedence)
 #
 # If you do not want the WebM version generated, you can
 # comment out the line near the bottom that reads
 #
 #  webmencode ${ORIG} 32
 #
-# If you think the video quality of the resulting 720p MP4 is too low,
+# If you think the video quality of the resulting 480p MP4 is too low,
 # then change the 25 in the line
 #
 #  mp4encode ${ORIG} 25
@@ -53,10 +56,10 @@ pushd "${TMP}"
 function mp4encode {
   IN=$1
   Q=$2
-  OUT="`basename -s ".tmp" ${IN}`-720p.mp4"
+  OUT="`basename -s ".tmp" ${IN}`-480p.mp4"
 
   ffmpeg -i ${IN} -i master.wav -map 0:v:0 -map 1:0 \
-  -vf scale=1280:720 -c:v libx264 -preset veryslow -tune film -crf ${Q} \
+  -vf scale=848:480 -c:v libx264 -preset veryslow -tune film -crf ${Q} \
   -pix_fmt yuv420p \
   -profile:v baseline -level 3.0 \
   -c:a libfdk_aac -b:a 64k \
@@ -70,17 +73,17 @@ function mp4encode {
 function webmencode {
   IN=$1
   Q=$2
-  OUT="`basename -s ".tmp" ${IN}`-720p.webm"
+  OUT="`basename -s ".tmp" ${IN}`-480p.webm"
 
   ffmpeg -y -i ${IN} -map 0:v:0 \
-  -vf scale=1280:720 -b:v 1024k -minrate 512k -maxrate 1485k \
+  -vf scale=848:480 -b:v 768k -minrate 384k -maxrate 560k \
   -threads 8 \
   -crf ${Q} -c:v libvpx-vp9 \
   -an \
   -pass 1 -f webm /dev/null
 
   ffmpeg -i ${IN} -i master.wav -map 0:v:0 -map 1:0 \
-  -vf scale=1280:720 -b:v 1024k -minrate 512k -maxrate 1485k \
+  -vf scale=848:480 -b:v 768k -minrate 384k -maxrate 560k \
   -threads 8 \
   -crf ${Q} -c:v libvpx-vp9 \
   -c:a libopus -b:a 48k \
