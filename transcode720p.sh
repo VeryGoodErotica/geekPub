@@ -91,8 +91,8 @@ function webmencode {
 }
 
 # extract and adjust audio
-ffmpeg -i ${ORIG} -map 0:a:0 -acodec pcm_s16le -ac 2 tmp.wav
-sox --norm tmp.wav -b 16 master.wav rate 48000 dither -s
+ffmpeg -i ${ORIG} -map 0:a:0 -filter:a loudnorm -acodec pcm_s16le -ac 2 tmp.wav
+sox tmp.wav -b 16 master.wav rate 48000 dither -s
 
 mp4encode ${ORIG} 25
 webmencode ${ORIG} 32
